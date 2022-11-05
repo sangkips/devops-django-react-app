@@ -6,7 +6,9 @@ services:
       context: ./api
     ports:
       - "8000:8000"
-    command: gunicorn api.wsgi --bind 0.0.0.0:8000
+    command: >
+      sh -c "python manage.py collectstatic --no-input
+             exec gunicorn --bind 0.0.0.0:8000 api.wsgi:application -w 2"
 
   frontend:
     build:
