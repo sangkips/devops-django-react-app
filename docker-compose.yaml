@@ -2,6 +2,7 @@ version: "3.9"
 
 services:
   backend:
+    restart: always
     build:
       context: ./api
     ports:
@@ -27,6 +28,7 @@ services:
 
   nginx:
     image: nginx:latest
+    restart: always
     ports:
       - 80:8080
     volumes:
@@ -37,7 +39,7 @@ services:
       - frontend
   db:
     image: postgres:14.5-alpine
-    # restart: always
+    restart: always
     volumes:
       - postgres-data:/var/lib/postgresql/data
     environment:
