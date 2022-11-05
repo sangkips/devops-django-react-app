@@ -8,8 +8,7 @@ services:
     ports:
       - "8000:8000"
     command: >
-      sh -c "python manage.py collectstatic --no-input
-             exec gunicorn --bind 0.0.0.0:8000 api.wsgi:application -w 2"
+      sh -c "exec gunicorn --bind 0.0.0.0:8000 api.wsgi:application -w 2"
     environment:
       - DB_HOST=db
       - DB_NAME=${DB_NAME}
@@ -38,7 +37,7 @@ services:
       - backend
       - frontend
   db:
-    image: postgres:14.5-alpine
+    image: postgres:15-alpine
     restart: always
     volumes:
       - postgres-data:/var/lib/postgresql/data
